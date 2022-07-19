@@ -13,6 +13,18 @@ export const CountdownContainer = styled.div`
     padding: 2rem 1rem;
     border-radius: 8px;
   }
+
+  @media ${(props) => props.theme.laptop} {
+    font-size: 5rem;
+    line-height: 3rem;
+    gap: 0.8rem;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    font-size: 3rem;
+    line-height: 0.5rem;
+    gap: 0.3rem;
+  }
 `;
 
 export const Separator = styled.div`
@@ -22,4 +34,12 @@ export const Separator = styled.div`
   overflow: hidden;
   display: flex;
   justify-content: center;
+
+  @media ${(props) => props.theme.laptop} {
+    width: 2rem;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    width: 1rem;
+  }
 `;

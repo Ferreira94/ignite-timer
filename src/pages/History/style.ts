@@ -20,6 +20,10 @@ export const HistoryContainer = styled.main`
     font-size: 1.5rem;
     color: ${(props) => props.theme["gray-100"]};
   }
+
+  @media ${(props) => props.theme.laptop} {
+    padding: 0.5rem;
+  }
 `;
 
 export const HistoryList = styled.div`
@@ -57,9 +61,11 @@ export const HistoryList = styled.div`
       padding: 1rem;
       font-size: 0.875rem;
       line-height: 1.6;
+      min-width: 10rem;
 
       &:first-child {
         width: 50%;
+        min-width: 25rem;
         padding-left: 1.5rem;
       }
 

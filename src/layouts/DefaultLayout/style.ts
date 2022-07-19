@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const LayoutContainer = styled.div`
   max-width: 74rem;
-  height: calc(100vh - 4rem);
+  width: 98%;
+  min-height: calc(100vh - 4rem);
   margin: 2rem auto;
   padding: 2.5rem;
 
@@ -11,4 +12,8 @@ export const LayoutContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  @media ${(props) => props.theme.laptop} {
+    padding: 1rem;
+  }
 `;
