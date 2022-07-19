@@ -1,6 +1,14 @@
+import { useContext } from "react";
+import { formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+
+import { CyclesContext } from "../../contexts/CyclesContext";
+
 import { HistoryContainer, HistoryList, Status } from "./style";
 
 export function History() {
+  const { cycles } = useContext(CyclesContext);
+
   return (
     <HistoryContainer>
       <h1>Meu histórico</h1>
@@ -16,46 +24,31 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Assistir ao Ignite</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <Status statusColor="green">Concluída</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Assistir ao Ignite</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <Status statusColor="red">Interrompida</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Assistir ao Ignite</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <Status statusColor="yellow">Em andamento</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Assistir ao Ignite</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <Status statusColor="green">Concluída</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Assistir ao Ignite</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <Status statusColor="green">Concluída</Status>
-              </td>
-            </tr>
+            {cycles.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>{item.task}</td>
+                  <td>{item.minutesAmount} minutos</td>
+                  <td>
+                    {formatDistanceToNow(new Date(item.startDate), {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </td>
+                  <td>
+                    {item.finishedDate && (
+                      <Status statusColor="green">Concluída</Status>
+                    )}
+                    {item.interruptDate && (
+                      <Status statusColor="red">Interrompida</Status>
+                    )}
+                    {!item.finishedDate && !item.interruptDate && (
+                      <Status statusColor="yellow">Em andamento</Status>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </HistoryList>
